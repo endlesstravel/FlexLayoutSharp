@@ -2,10 +2,6 @@ using System.Collections.Generic;
 
 namespace FlexLayoutSharp
 {
-    public class NodeWithoutContext
-    {
-
-    }
     public partial class Node
     {
         readonly internal Style nodeStyle = new Style();

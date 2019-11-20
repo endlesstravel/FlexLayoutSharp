@@ -8,6 +8,14 @@ namespace FlexLayoutSharp
 {
     public partial class Node
     {
+        public void CopyStyle(Node other)
+        {
+            if (other == null)
+                throw new ArgumentNullException(nameof(other));
+
+            Style.Copy(this.nodeStyle, other.nodeStyle);
+        }
+
         public void MarkAsDirty()
         {
             Flex.nodeMarkDirtyInternal(this);
@@ -833,21 +841,63 @@ namespace FlexLayoutSharp
         #endregion
 
         #region tree
+        public Node GetParent() => Parent;
+        public IEnumerable<Node> GetChildrenIter() => Children;
         public Node GetChild(int idx)
         {
             return Flex.GetChild(this, idx);
         }
         public void AddChild(Node child)
         {
+            if (child == null || child.Parent == this)
+                return;
+
             Flex.InsertChild(this, child, ChildrenCount);
+        }
+        public int IndexOfChild(Node child)
+        {
+            return Children.IndexOf(child);
         }
         public void InsertChild(Node child, int idx)
         {
+            if (child == null)
+                return;
+
             Flex.InsertChild(this, child, idx);
         }
         public void RemoveChild(Node child)
         {
             Flex.RemoveChild(this, child);
+        }
+        public bool ReplaceChild(int index, Node child)
+        {
+            if (child == null)
+                return false;
+
+            if (0 <= index && index < ChildrenCount)
+            {
+                child.Parent = this;
+                Children[index] = child;
+                MarkAsDirty();
+                return true;
+            }
+
+            return false;
+        }
+        public void SetParent(Node parent)
+        {
+            if (parent == Parent)
+                return;
+
+            RemoveParent();
+            parent.AddChild(this);
+        }
+        public void RemoveParent()
+        {
+            if (Parent != null)
+            {
+                Parent.RemoveChild(this);
+            }
         }
         #endregion
     }
