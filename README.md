@@ -11,7 +11,7 @@ Nuget Package [FlexLayoutSharp](https://www.nuget.org/packages/FlexLayoutSharp/)
  
 ## Usage
 
-more example please check [test file](RockyfiTests/Rockyfi.test.cs)
+more example please check [test file](TestFlexLayoutSharp/TestFlexLayoutSharp.cs)
 
 
 ```C#
