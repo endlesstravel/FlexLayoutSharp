@@ -79,6 +79,7 @@ namespace FlexLayoutSharp
         FlexEnd,
         SpaceBetween,
         SpaceAround,
+        SpaceEvenly
     }
 
     public enum LogLevel
@@ -280,6 +281,8 @@ namespace FlexLayoutSharp
                     return "space-between";
                 case Justify.SpaceAround:
                     return "space-around";
+                case Justify.SpaceEvenly:
+                    return "space-evenly";
             }
             return "unknown";
         }
@@ -521,6 +524,7 @@ namespace FlexLayoutSharp
                 case "flex-end": result = Justify.FlexEnd; return true;
                 case "space-between": result = Justify.SpaceBetween; return true;
                 case "space-around": result = Justify.SpaceAround; return true;
+                case "space-evenly": result = Justify.SpaceEvenly; return true;
             }
             result = Justify.FlexStart;
             return true;

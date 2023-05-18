@@ -2098,6 +2098,11 @@ namespace FlexLayoutSharp
                         betweenMainDim = remainingFreeSpace / (float)(itemsOnLine);
                         leadingMainDim = betweenMainDim / 2;
                         break;
+                    case Justify.SpaceEvenly:
+                        // Space on the edges is half of the space between elements
+                        betweenMainDim = remainingFreeSpace / (float)(itemsOnLine + 1);
+                        leadingMainDim = betweenMainDim;
+                        break;
                     case Justify.FlexStart:
                         break;
                     }
